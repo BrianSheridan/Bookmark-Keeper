@@ -15,10 +15,22 @@ function saveBookmark(e){
   }
 
   // Local Storage Test
-  localStorage.setItem('test', 'Hello World');
-  console.log(localStorage.getItem('test'));
-  localStorage.removeItem('test');
-  console.log(localStorage.getItem('test'));
+  // localStorage.setItem('test', 'Hello World');
+  // console.log(localStorage.getItem('test'));
+  // localStorage.removeItem('test');
+  // console.log(localStorage.getItem('test'));
+
+  // test if bookmarks is null
+  if(localStorage.getItem('bookmarks') === null){
+  // Init array
+  var bookmarks = [];
+  // Add to Array
+  bookmarks.push(bookmark);
+  // set to local storage
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+
+  }
+  
 
 
   // Prevent form from submitting
