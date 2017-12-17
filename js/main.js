@@ -44,6 +44,24 @@ function saveBookmark(e){
   e.preventDefault();
 }
 
+// delete bookmark
+function deleteBookmark(url){
+   //get bookmarks from local Storage
+   var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+   // loop through the bookmarks
+   for(var i =0; i < bookmarks.length; i++){
+     if(bookmarks[i].url == url){
+       // Remove from Array
+       bookmarks.splice(i, 1);
+     }
+   }
+   // reset back to localStorage
+   localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+
+   // re-fetch Bookmarks
+   fetchBookmarks();
+}
+
 // fetch bookmarks
 function fetchBookmarks(){
 // Get bookmarks from localStorage
@@ -59,7 +77,13 @@ for(var i = 0; i < bookmarks.length; i++){
   var name = bookmarks[i].name;
   var url = bookmarks[i].url;
 
-  bookmarksResults.innerHTML += name;
+  bookmarksResults.innerHTML += '<div class="well">'+
+  '<h3>'+name+
+  ' <a class="btn btn-default" target="_blank" href="'+url+'">Visit</a> ' +
+  ' <a onclick="deleteBookmark(\''+url+'\')" class="btn btn-danger" href="#">Delete</a> ' +
+  '</h3>'+
+  '</div>';
+
  }
 }
 
