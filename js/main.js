@@ -9,11 +9,11 @@ function saveBookmark(e){
   var siteUrl =document.getElementById('siteUrl').value;
   console.log(siteName);
 
-  // prompt if nothing is entered
-  if(!siteName || !siteUrl){
-    alert('Please enter in the form');
+
+  if(!validateForm(siteName, siteUrl)){
     return false;
   }
+
 
   var bookmark = {
       name: siteName,
@@ -42,6 +42,9 @@ function saveBookmark(e){
     // Re-set back to LocalStorage
     localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
   }
+
+  // Clear Form
+  document.getElementById('myForm').reset();
 
   // Re-fetch bookmarks
   fetchBookmarks();
@@ -92,4 +95,24 @@ for(var i = 0; i < bookmarks.length; i++){
 
  }
 }
+
+// Validate the form
+function validateForm(siteName, siteUrl){
+ if(!siteName || !siteUrl){
+    alert('Please enter in the form');
+   return false;
+ }
+
+ var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+ var regex = new RegExp(expression);
+
+ if(!siteUrl.match(regex)){
+   alert('Please use a valid Url');
+   return false;
+ }
+
+ return true;
+}
+
+
 
