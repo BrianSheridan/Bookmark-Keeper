@@ -9,6 +9,12 @@ function saveBookmark(e){
   var siteUrl =document.getElementById('siteUrl').value;
   console.log(siteName);
 
+  // prompt if nothing is entered
+  if(!siteName || !siteUrl){
+    alert('Please enter in the form');
+    return false;
+  }
+
   var bookmark = {
       name: siteName,
       url: siteUrl
